@@ -34,3 +34,10 @@ The parser reads allocation from D4, activity rows below `กิจกรรม`
 ## Deployment
 
 `vite.config.ts` sets `/ict-smo-club-dashboard/` as the asset base. `.github/workflows/deploy.yml` deploys on `main` and manual dispatch. In Settings → Pages, choose **GitHub Actions** as the source. No frontend secrets are required.
+
+## Validation snapshot (11 November 2026)
+
+- Nine exact workbook tabs; six budget request rows; 11 normalized activity records across the slide snapshot and workbook.
+- October original plan: seven activities, including three carried to November, one confirmed cancellation, and one cancellation without confirmation. November original plan: three activities; Digital Forensics is additional and has no original planned month.
+- No verified actual expense amount appears in the populated November budget rows. The Table Tennis reported balance conflicts with the sum of its two request rows.
+- The slide overview says three November proposals were submitted, but the detailed Table Tennis Beginner Class row does not show its proposal status. The normalized record remains `unknown` pending source confirmation.
