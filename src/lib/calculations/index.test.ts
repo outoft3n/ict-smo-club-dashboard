@@ -1,0 +1,6 @@
+import {describe,it,expect} from 'vitest';
+import {monthStats,budgetIssues} from './index';
+import {mergeDataset,isoDate} from '../normalize';
+import type {Dataset} from '../../types';
+const data:Dataset={schemaVersion:1,publishedAt:'2026-11-11',sourceNote:'',clubs:[{id:'a',name:'A',allocation:100,reportedBalance:80,sourceTab:'A',sourceUrl:''}],activities:[{id:'x',clubId:'a',title:'X',originalMonth:'2026-10',plannedDate:null,revisedDate:'2026-11-07',actualDate:'2026-11-07',venue:'',status:'completed',proposalStatus:'unknown',proposalDate:null,summaryStatus:'pending',summaryDate:null,requestedBudget:30,actualExpense:null,remarks:'',sourceRefs:[],manual:true}]};
+describe('normalized reporting',()=>{it('counts carry-over once by original and event months',()=>{expect(monthStats(data,'2026-10').postponed).toBe(1);expect(monthStats(data,'2026-10').completed).toBe(0);expect(monthStats(data,'2026-11').completed).toBe(1)});it('flags reported balance conflict without treating blank actual as zero',()=>{expect(budgetIssues(data)).toHaveLength(2)});it('preserves manual corrections on repeat import',()=>{expect(mergeDataset(data,data,new Set(['activity:x'])).activities[0].manual).toBe(true)});it('normalizes Buddhist calendar dates',()=>{expect(isoDate('11 พฤศจิกายน 2569')).toBe('2026-11-11')})});
